@@ -12,8 +12,6 @@ app.use(express.urlencoded({ extended: false, limit: '20mb' }))
 const dotenv = require('dotenv');
 dotenv.config();
 
-/* Initializing the path for routes */
-app.use("/", require("./src/routes"));
 
 require('./src/config/passport')(passport);
 
@@ -29,6 +27,9 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+/* Initializing the path for routes */
+app.use("/", require("./src/routes"));
 
 mongoose.connect(process.env.MONGO_URI,
     { useNewUrlParser: true, useUnifiedTopology: true })

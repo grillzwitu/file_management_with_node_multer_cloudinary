@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/users_controller")
 /* Register router with passport package */
 router.post('/register', userController.register);
-  
+
 /* Login router */ 
 router.post('/login', userController.login);
 

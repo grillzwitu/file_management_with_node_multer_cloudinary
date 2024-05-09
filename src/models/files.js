@@ -6,7 +6,7 @@ const FileSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    public_id: {
+    storage_id: {
       type: String,
       required: true
     },
