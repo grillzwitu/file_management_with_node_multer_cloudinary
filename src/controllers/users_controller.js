@@ -3,8 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Load User model
-const User = require('../models/User');
-const { forwardAuthenticated } = require('../config/auth');
+const User = require('../models/users');
+//const { forwardAuthenticated } = require('../config/auth');
 
 exports.register = (req, res) => {
     console.log("Request: " + JSON.stringify(req.body))

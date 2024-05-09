@@ -1,26 +1,26 @@
 const mongoose = require('mongoose');
 
 /* Creating the schema with name, email, password and date */
-const UserSchema = new mongoose.Schema({
+const FileSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true
     },
-    email: {
+    public_id: {
       type: String,
       required: true
     },
-    password: {
+    url: {
       type: String,
       required: true
     },
-    date: {
+    last_update_date: {
       type: Date,
       default: Date.now
     }
   });
   
   /* Exporting schema with collection as CrudOperations */
-  const User = mongoose.model('User', UserSchema);
+  const User = mongoose.model('File', FileSchema);
   
-  module.exports = User;
+  module.exports = File;
