@@ -1,6 +1,6 @@
 const express = require('express');
+const router = express.Router();
 const fs = require('fs');
-const router = express().Router();
 const File = require("../models/files");
 const { ensureAuthenticated } = require('../config/auth');
 const cloudinary = require("../utils/cloudinary");
@@ -49,13 +49,13 @@ router.delete('/deletefile/:id', ensureAuthenticated, async (req, res) => {
     try {
     // fetch the record from db
     const result = await File.findOne({_id: req.params.id});
-    / Delete image from cloudinary
+    //Delete image from cloudinary
     await cloudinary.uploader.destroy(result.storage_id);
     // Delete user from db
     await result.remove();
     res.json(user);
     
-    res.status(200).jason(result);
+    res.status(200).json(result);
   } catch (err) {
     console.log(err);
     res.status(400).send(err);

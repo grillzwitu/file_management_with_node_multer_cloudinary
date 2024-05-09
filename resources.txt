@@ -11,3 +11,5 @@ https://www.bezkoder.com/node-js-express-file-upload/#google_vignette
 https://devpress.csdn.net/mongodb/62f20968c6770329307f5d75.html
 
 https://kumaranmk.hashnode.dev/managing-images-in-cloudinary
+
+https://gist.github.com/yukeehan/23fbbe53f1ca94be440161c1562b489a

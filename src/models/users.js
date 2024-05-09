@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 /* Creating the schema with name, email, password and date */
 const UserSchema = new mongoose.Schema({
-    name: {
+    username: {
       type: String,
       required: true
     },
-    email: {
+    name: {
       type: String,
       required: true
     },
@@ -19,6 +20,8 @@ const UserSchema = new mongoose.Schema({
       default: Date.now
     }
   });
+
+  UserSchema.plugin(passportLocalMongoose);
   
   /* Exporting schema with collection as CrudOperations */
   const User = mongoose.model('User', UserSchema);
