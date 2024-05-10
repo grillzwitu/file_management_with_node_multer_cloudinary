@@ -37,6 +37,7 @@ MONGO_URI="mongodb+srv://....."
 CLOUD_NAME="your_cloudinary_cloud_name"
 CLOUD_API_KEY="your_cloudinary_cloud_api_key"
 CLOUD_API_SECRET="your_cloudinary_api_secret"
+```
 
 5. Install all the dependencies, run in the terminal "npm install".
 6. Run the application, "npm run server".
