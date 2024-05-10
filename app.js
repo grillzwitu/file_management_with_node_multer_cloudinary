@@ -2,22 +2,21 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const mongoose = require('mongoose');
-var cors = require('cors');
 
+
+//Initialize app and configurations
 const app = express();
-
+var cors = require('cors');
 app.use(cors());
-
 app.set('view engine', 'ejs');
-
-
 app.use(express.json({limit: '20mb'}))
 app.use(express.urlencoded({ extended: false, limit: '20mb' }))
 
+// Initialize environment variables
 const dotenv = require('dotenv');
 dotenv.config();
 
-
+// Define and Initialize passport authentication
 require('./src/config/passport')(passport);
 
 // Express session
@@ -33,9 +32,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* Initializing the path for routes */
+/* Initialize path for routes */
 app.use("/", require("./src/routes"));
 
+//Connect DB and start app
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         app.listen((process.env.PORT), () => {
@@ -45,23 +45,3 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.log(error)
 })
-
-//global.dbconn = "";
-
-/* Connect the app with mongoose */ 
-// mongoose.connect(
-//     process.env.MONGO_URI,
-//     { useNewUrlParser: true, useUnifiedTopology: true },
-//     (client, err) =>{
-//         try{
-//             console.log("Connected to db: " + client)
-//         }catch(err){
-//             console.log(err);
-//         }
-//     }
-// )
-
-/* Setting up server */ 
-// app.listen(process.env.PORT, function(){
-//     console.log("This server running");
-// })

@@ -13,16 +13,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({
     storage: storage,
-    // fileFilter: function(req, file, callback){
-    //     if(
-    //         file.minetype == "text/csv"
-    //     ){
-    //         callback(null, true)
-    //     } else{
-    //         console.log("Error in uploading")
-    //         callback(null, false)
-    //     }
-    // },
     limits: {
         fileSize: 1024 * 1024 * 2
     }
