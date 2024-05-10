@@ -2,8 +2,13 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const mongoose = require('mongoose');
+var cors = require('cors');
 
 const app = express();
+
+app.use(cors());
+
+app.set('view engine', 'ejs');
 
 
 app.use(express.json({limit: '20mb'}))
@@ -31,8 +36,7 @@ app.use(passport.session());
 /* Initializing the path for routes */
 app.use("/", require("./src/routes"));
 
-mongoose.connect(process.env.MONGO_URI,
-    { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         app.listen((process.env.PORT), () => {
             console.log('Connected to DB and listening to port', process.env.PORT)

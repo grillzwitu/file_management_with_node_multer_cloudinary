@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+//const passportLocalMongoose = require('passport-local-mongoose');
 
 /* Creating the schema with name, email, password and date */
 const UserSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     }
   });
 
-  UserSchema.plugin(passportLocalMongoose);
+  //UserSchema.plugin(passportLocalMongoose);
   
   /* Exporting schema with collection as CrudOperations */
   const User = mongoose.model('User', UserSchema);

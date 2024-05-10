@@ -7,7 +7,7 @@ const cloudinary = require("../utils/cloudinary");
 const upload = require("../middleware/upload");
 
 /* Upload file router with passport package */
-router.post('/uploadfile',upload.single('file'),ensureAuthenticated, async (req, res) => {
+router.post('/uploadfile', upload.single('file'), ensureAuthenticated, async (req, res) => {
     
     try {
     // Upload image to cloudinary
