@@ -55,4 +55,5 @@ Note: To carry out any file operation, the user must be logged in.
 ## Work in Progress
 - Creating the views for a better testing experience.
 - Testing extensively to handle errors related to specific edge cases.
+- Implement notifications for events (registration, file upload and file deletion). 
 
