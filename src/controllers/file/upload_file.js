@@ -18,7 +18,7 @@ exports.uploadFile = async (req, res) => {
         // Save file
         await file.save();
 
-        // Remove file from uploads
+        // Remove local file from uploads
         deleteFile(req.file.path);
 
         res.status(201).json(file);
@@ -27,4 +27,3 @@ exports.uploadFile = async (req, res) => {
         res.status(400).send(err);
     }
 };
-
