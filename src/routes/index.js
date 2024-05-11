@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* Initializing other routes */
 
-router.use('/', require('./users.js'));
-router.use('/', require('./files.js'));
+router.use('/users/', require('./users'));
+router.use('/files/', require('./files'));
 
 module.exports = router;

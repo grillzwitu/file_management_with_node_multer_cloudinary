@@ -2,14 +2,16 @@ const File = require("../../models/files");
 
 // All files
 const readAllFiles = async (req, res, next) => {
-    const files = await File.find();
+    try {
+        const files = await File.find();
 
-    // check for files
-    if (!files) {
-        return res.status(404).json({ error: 'No files found' });
+        // Sending response with files
+        res.status(200).send(files);
+    } catch (err) {
+        // If an error occurs during database query
+        console.error('Error occurred while reading files:', err);
+        res.status(500).json({ error: 'Internal server error' });
     }
-
-    res.status(200).json(files);
-}
+};
 
 module.exports = readAllFiles;

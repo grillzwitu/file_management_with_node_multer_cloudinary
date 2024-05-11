@@ -1,10 +1,18 @@
+const fs = require('fs');
 const path = require('path')
 const multer = require('multer')
 
-// intialize disk storage
+// check if local storage location exists.
+const uploadDir = './uploads';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+
+// intialize local disk storage
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, './uploads')
+        cb(null, uploadDir)
     },
     filename: function(req, file, cb){
         let ext = path.extname(file.originalname)
@@ -12,7 +20,7 @@ var storage = multer.diskStorage({
     }
 });
 
-//upload method
+//Defining multer
 var upload = multer({
     storage: storage,
     limits: {

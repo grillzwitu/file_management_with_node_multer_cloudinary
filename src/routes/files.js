@@ -7,16 +7,20 @@ const downloadController = require("../controllers/file/retrieve_file");
 const deleteController = require("../controllers/file/delete_file");
 const allFilesController = require("../controllers/file/list_all_files");
 
+router.get("/", ensureAuthenticated, function(req, res){
+    res.render("pages/files"); 
+ });
+
 /* Upload file router with passport package */
-router.post('/uploadfile', upload.single('file'), ensureAuthenticated,  uploadController);
+router.post('/uploadfile', ensureAuthenticated, upload.single('file'),  uploadController);
 
-// List all files router
-//router.get('/getAllFiles', ensureAuthenticated, allFilesController);
+// List all files route
+router.get('/getallfiles', ensureAuthenticated, allFilesController);
 
-/* download router  */ 
-//router.get('/downloadfile/:id', ensureAuthenticated, downloadController);
+/* download route  */ 
+router.get('/downloadfile/:id', ensureAuthenticated, downloadController);
 
-/* Delete file router */ 
-//router.delete('/deletefile/:id', ensureAuthenticated, deleteController);
+/* Delete file route */ 
+router.delete('/deletefile/:id', ensureAuthenticated, deleteController);
 
 module.exports = router;

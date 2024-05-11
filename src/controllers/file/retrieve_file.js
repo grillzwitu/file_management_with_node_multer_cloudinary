@@ -12,13 +12,18 @@ const download = async (req, res, next) => {
     
         // check if file exists on db
         if (!result) {
-          return res.status(404).json({ error: 'File not found' });
+            return res.status(404).json({ error: 'File not found' });
         }
     
         const url = result.url;
     
-        // setting the download directory
+        // Setting the download directory
         const downloadDir = './downloads';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(downloadDir)) {
+            fs.mkdirSync(downloadDir, { recursive: true });
+        }
     
         // Extracting filename from URL
         const filename = path.basename(url);
@@ -37,6 +42,6 @@ const download = async (req, res, next) => {
         console.error(err);
         res.status(400).send(err);
     }
-}
+};
 
 module.exports = download;
