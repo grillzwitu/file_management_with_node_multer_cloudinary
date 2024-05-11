@@ -56,6 +56,7 @@ Note: To carry out any file operation, the user must be logged in.
 - Testing extensively to handle errors related to specific edge cases.
 - Implement files ownership between users.
 - Implement notifications for events (registration, file upload and file deletion).
+- Implement application logging.
 - Creating views with EJS to make frontend templates for a better testing experience.
 - Deploy/Host application.
 
