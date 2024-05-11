@@ -1,7 +1,7 @@
 const File = require("../../models/files");
 
 // All files
-exports.readAllFiles = async (req, res, next) => {
+const readAllFiles = async (req, res, next) => {
     const files = await File.find();
 
     // check for files
@@ -11,3 +11,5 @@ exports.readAllFiles = async (req, res, next) => {
 
     res.status(200).json(files);
 }
+
+module.exports = readAllFiles;

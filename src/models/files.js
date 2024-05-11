@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-/* Creating the schema with name, email, password and date */
+/* Creating the schema with name, storage_id, url, owner and date */
 const FileSchema = new mongoose.Schema({
     name: {
       type: String,

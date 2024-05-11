@@ -1,26 +1,30 @@
 const File = require("../../models/files");
-const cloudinary = require("../utils/cloudinary");
+const cloudinary = require("../../utils/cloudinary");
 
-exports.delete = async (req, res, next) => {
+const deleteFile = async (req, res, next) => {
+
+    const id = req.params.id
 
     try {
         // fetch the record from db
-        const result = await File.findOne({_id: req.params.id});
+        const record = await File.findById(id);
         
         // check if file exists on db
-        if (!result) {
+        if (!record) {
           return res.status(404).json({ error: 'File not found' });
         }
       
         // Delete image from Cloudinary
-        await cloudinary.uploader.destroy(result.storage_id);
+        await cloudinary.uploader.destroy(record.storage_id);
     
         // Delete file record from the database
-        await File.findByIdAndDelete({_id: req.params.id});
+        await File.findByIdAndDelete(req.params.id);
     
-        res.status(200).json(result);
+        res.status(200).json(record);
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal server error');
     }
 }
+
+module.exports = deleteFile;

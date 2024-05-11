@@ -5,7 +5,7 @@ const path = require('path');
 const { promisify } = require('util');
 const streamPipeline = promisify(require('stream').pipeline);
 
-exports.download = async (req, res, next) => {
+const download = async (req, res, next) => {
     try {
         // Fetch the record from the database
         const result = await File.findOne({ _id: req.params.id });
@@ -38,3 +38,5 @@ exports.download = async (req, res, next) => {
         res.status(400).send(err);
     }
 }
+
+module.exports = download;

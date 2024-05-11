@@ -1,8 +1,9 @@
 const deleteFile = require("../../utils/delete_local_file")
-const File = require("../models/files");
-const cloudinary = require("../utils/cloudinary");
+const File = require("../../models/files");
+const cloudinary = require("../../utils/cloudinary");
+const logger = require('winston'); // Assuming you're using the Winston logging library
 
-exports.uploadFile = async (req, res) => {
+const uploadFile = async (req, res, next) => {
     try {
         // Upload image to cloudinary
         const result = await cloudinary.uploader.upload(req.file.path);
@@ -21,9 +22,12 @@ exports.uploadFile = async (req, res) => {
         // Remove local file from uploads
         deleteFile(req.file.path);
 
-        res.status(201).json(file);
+        // Sending response
+        res.status(201).json({ success: true, data: file });
     } catch (err) {
-        console.log(err);
-        res.status(400).send(err);
+        logger.error('Error occurred while uploading file:', err);
+        res.status(400).json({ success: false, error: 'File upload failed. Please try again.' });
     }
 };
+
+module.exports = uploadFile;
