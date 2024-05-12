@@ -3,7 +3,7 @@ const File = require("../../models/files");
 // All files
 const readAllFiles = async (req, res, next) => {
     try {
-        const files = await File.find();
+        const files = await File.find({owner: req.user.username});
 
         // Sending response with files
         res.status(200).send(files);

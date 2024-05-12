@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require('../config/auth');
-const upload = require("../middleware/upload");
+const { ensureAuthenticated } = require('../auth/auth');
+const upload = require("../utils/middleware/upload");
 const uploadController = require("../controllers/file/upload_file");
 const downloadController = require("../controllers/file/retrieve_file");
 const deleteController = require("../controllers/file/delete_file");

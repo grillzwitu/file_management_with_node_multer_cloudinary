@@ -1,5 +1,7 @@
 /node_modules
 /resources
+/uploads
+/downloads
 resources.txt
 env
 .env

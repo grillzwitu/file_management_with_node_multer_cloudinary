@@ -14,6 +14,7 @@ const uploadFile = async (req, res, next) => {
         // Create file record 
         let file = new File({
             name: uploadedFile.original_filename,
+            owner: req.user.username,
             storage_id: uploadedFile.public_id,
             url: uploadedFile.secure_url,
             last_update_date: uploadedFile.created_at

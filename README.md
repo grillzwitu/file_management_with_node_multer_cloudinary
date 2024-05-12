@@ -5,11 +5,11 @@ This project is a simple demonstration of a file management backend application 
 ## Programming Language and Frameworks, Libraries/Modules, Technologies
 
 - **JavaScript:** The base programming language.
-- **Node.js (Express):** As the server application framework.
-- **Axios:** For making HTTP requests, specifically for downloading the file.
+- **node.js (Express):** As the server application framework.
+- **axios:** For making HTTP requests, specifically for downloading the file.
 - **bcryptjs:** For character encryption and hashing, specifically for password encryption.
-- **Cloudinary:** A cloud file storage service.
-- **Cors:** To enable Cross-Origin Resource Sharing.
+- **cloudinary:** A cloud file storage service.
+- **cors:** To enable Cross-Origin Resource Sharing.
 - **dotenv:** To enable the use of environment variables to store application secrets.
 - **ejs:** To create simple views.
 - **express-session:** To create sessions after authentication.
@@ -19,6 +19,8 @@ This project is a simple demonstration of a file management backend application 
 - **nodemon:** A dev dependency to maintain and restart a live server while making changes.
 - **passport:** A Node.js authentication middleware.
 - **passport-local:** The authentication strategy module, supports storing credentials locally in the application database.
+- **express-validator:** To handle registration validation.
+- **winston:** To handle application logging.
 
 ## Current State
 
@@ -40,10 +42,10 @@ CLOUD_API_SECRET="your_cloudinary_api_secret"
 
 4. Install all the dependencies, run in the terminal "npm install".
 5. Run the application, "npm run server".
-6. To test the API endpoints open a REST client like Postman and set up the following endpoints:
+6. To test the API endpoints, open a REST client like Postman and set up the following endpoints:
 
-  - **POST** (http://localhost:3000/users/register): To sign up or register as a user, requires a JSON body containing username, name, password, password2.
-  - **POST** (http://localhost:3000/users/login): To log in as a user on the application.
+  - **POST** (http://localhost:3000/users/register): To sign up or register as a user, requires a JSON body containing username, email, name, password, password2.
+  - **POST** (http://localhost:3000/users/login): To log in as a user on the application, requires a JSON body containing username and password.
   - **GET** (http://localhost:3000/users/logout): To log out and end a session.
   - **POST** (http://localhost:3000/files/uploadfile): To upload and store a file on the cloud service.
   - **GET** (http://localhost:3000/files/getallfiles): To retrive alist of all the file records.
@@ -54,9 +56,7 @@ Note: To carry out any file operation, the user must be logged in.
 
 ## Work in Progress
 - Testing extensively to handle errors related to specific edge cases.
-- Implement files ownership between users.
+- Creating views with EJS to make frontend templates for a better testing experience.
 - Implement notifications for events (registration, file upload and file deletion).
 - Implement application logging.
-- Creating views with EJS to make frontend templates for a better testing experience.
 - Deploy/Host application.
-
