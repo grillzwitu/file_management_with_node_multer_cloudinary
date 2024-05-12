@@ -1,9 +1,6 @@
 const deleteFile = require("../../utils/delete_local_file");
 const File = require("../../models/files");
 const cloudinary = require("../../utils/cloudinary");
-const logger = require('winston'); // Assuming you're using the Winston logging library
-const fs = require('fs');
-const path = require('path');
 
 const uploadFile = async (req, res, next) => {
     try {

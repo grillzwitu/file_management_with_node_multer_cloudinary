@@ -1,56 +1,77 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <%- include('../partials/head'); %>
-</head>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
 
-<body class="container">
+    <body class="container">
 
-<header>
-    <%- include('../partials/header'); %>
-</header>
+        <header>
+            <%- include('../partials/header'); %>
+        </header>
 
-<main>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Upload Form -->
-                <div class="card">
-                    <div class="card-header">
-                        Upload File
-                    </div>
-                    <div class="card-body">
-                        <form action="/files/uploadfile" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="file">Choose File</label>
-                                <input type="file" class="form-control-file" id="file" name="file" required>
+        <main>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Upload Form -->
+                        <div class="card">
+                            <div class="card-header">
+                                Upload File
                             </div>
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                        </form>
+                            <div class="card-body">
+                                <form action="/files/uploadfile" method="post" enctype="multipart/form-data" onsubmit="reloadPage()">
+                                    <div class="form-group">
+                                        <label for="file">Choose File</label>
+                                        <input type="file" class="form-control-file" id="file" name="file" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- File List -->
+                        <div class="card">
+                            <div class="card-header">
+                                File List
+                            </div>
+
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <% files.forEach(file => { %>
+                                    <li class="list-group-item">
+                                        <%= file.name %>
+
+                                        <div>
+                                            <a href="<%= file.url %>" class="btn btn-sm btn-success mx-2">View</a>
+                                            <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2">Download</a>
+                                            <!-- Delete button -->
+                                            <form action="/files/deletefile/<%= file._id %>" method="delete" class="d-inline">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-sm btn-danger mx-2">Delete</button>
+                                            </form>
+                                        </div>
+                                        
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
+            
 
-            <div class="col-md-6">
-                <!-- File List -->
-                <div class="card">
-                    <div class="card-header">
-                        File List
-                    </div>
+        </main>
 
-                    
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+        <footer class="fixed-bottom">
+            <%- include('../partials/footer'); %>
+        </footer>
+
+    </body>
     
-
-</main>
-
-<footer class="fixed-bottom">
-    <%- include('../partials/footer'); %>
-</footer>
-
-</body>
 </html>
