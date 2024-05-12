@@ -7,6 +7,10 @@ const UserSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    email: {
+      type: String,
+      required: true
+    },
     name: {
       type: String,
       required: true
@@ -20,10 +24,9 @@ const UserSchema = new mongoose.Schema({
       default: Date.now
     }
   });
-
-  //UserSchema.plugin(passportLocalMongoose);
   
   /* Exporting schema with collection as CrudOperations */
   const User = mongoose.model('User', UserSchema);
   
   module.exports = User;
+  

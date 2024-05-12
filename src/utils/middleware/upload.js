@@ -8,7 +8,6 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-
 // intialize local disk storage
 var storage = multer.diskStorage({
     destination: function(req, file, cb){

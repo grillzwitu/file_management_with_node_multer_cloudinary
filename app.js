@@ -17,7 +17,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Define and Initialize passport authentication
-require('./src/config/passport')(passport);
+require('./src/auth/passport')(passport);
 
 // Express session
 app.use(

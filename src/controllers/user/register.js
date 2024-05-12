@@ -1,63 +1,49 @@
 const bcrypt = require('bcryptjs');
-
-// Load User model
+const { validationResult } = require('express-validator');
 const User = require('../../models/users');
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
+    try {
+        // Extracting data from the request body
+        const { username, email, name, password, password2 } = req.body;
 
-    const { username, name, password, password2 } = req.body;
-    let errors = [];
-  
-    /* check if all fields exist */
-    if (!username || !name || !password || !password2) {
-      errors.push({ msg: 'Please enter all fields' });
-    }
-    
-    /* check if password and password2 match */
-    if (password != password2) {
-      errors.push({ msg: 'Passwords do not match' });
-    }
-  
-    /* check password length */
-    if (password.length < 3) {
-      errors.push({ msg: 'Password must be at least 3 characters' });
-    }
-  
-    if (errors.length > 0) {
-      res.status(400).send('registeration error')
-    } else {
-    
-    /* Checking if user exists */
-      User.findOne({ username: username }).then(user => {
-        if (user) {
-          errors.push({ msg: 'Username already exists' });
-          res.status(400).send('username exists');
-        } 
-        
-       /* Creating the user */ 
-       else {
-          const newUser = new User({
+        // Validate the request
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        // Check if username exists
+        const existingUsername = await User.findOne({ username: username });
+        if (existingUsername) {
+            return res.status(400).send('Username already exists');
+        }
+
+        // Check if email exists
+        const existingEmail = await User.findOne({ email: email });
+        if (existingEmail) {
+            return res.status(400).send('Email already exists');
+        }
+
+        // Create the new user
+        const newUser = new User({
             username,
+            email,
             name,
             password
-          });
-          
-          /* hash the password */
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) throw err;
-              newUser.password = hash;
-              newUser
-                .save()
-                .then(user => {
-                  res.redirect(201, "pages/login");
-                })
-                .catch(err => console.log(err));
-            });
-          });
-        }
-      });
+        });
+
+        // Hash the password
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(newUser.password, salt);
+        newUser.password = hash;
+
+        // Save the new user
+        const savedUser = await newUser.save();
+        res.redirect(201, 'pages/login');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
     }
 
-  }
-  
+};

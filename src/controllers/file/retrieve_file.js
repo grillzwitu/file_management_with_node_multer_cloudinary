@@ -8,7 +8,7 @@ const streamPipeline = promisify(require('stream').pipeline);
 const download = async (req, res, next) => {
     try {
         // Fetch the record from the database
-        const result = await File.findOne({ _id: req.params.id });
+        const result = await File.findOne({ _id: req.params.id, owner:req.user.username });
     
         // check if file exists on db
         if (!result) {

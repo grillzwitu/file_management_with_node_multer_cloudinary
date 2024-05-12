@@ -6,6 +6,10 @@ const FileSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    owner:  {
+      type: String,
+      required: true
+    },
     storage_id: {
       type: String,
       required: true
