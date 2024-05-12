@@ -6,12 +6,13 @@ module.exports = {
       if (req.isAuthenticated()) {
         return next();
       }
-      res.redirect(401, 'pages/login');
+      res.redirect(401, '/users/login');
     },
     forwardAuthenticated: function(req, res, next) {
       if (!req.isAuthenticated()) {
         return next();
       }
-      res.redirect(200, '/pages/home');      
+
+      next();  
     }
 };

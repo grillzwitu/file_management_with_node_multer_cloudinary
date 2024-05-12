@@ -6,4 +6,8 @@ var router = express.Router();
 router.use('/users/', require('./users'));
 router.use('/files/', require('./files'));
 
+router.get("/",function(req, res){
+    res.render("pages/home", { currentPage: 'home' }); 
+ });
+
 module.exports = router;
