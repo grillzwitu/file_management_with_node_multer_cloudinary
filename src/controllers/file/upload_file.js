@@ -26,7 +26,7 @@ const uploadFile = async (req, res, next) => {
         // Sending response
         res.status(201).json({ success: true, data: file });
     } catch (err) {
-        logger.error('Error occurred while uploading file:', err);
+        //logger.error('Error occurred while uploading file:', err);
         res.status(400).json({ success: false, error: 'File upload failed. Please try again.' });
     }
 };
