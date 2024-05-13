@@ -35,6 +35,12 @@ app.use(passport.session());
 /* Initialize path for routes */
 app.use("/", require("./src/routes"));
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
+
 //Connect DB and start app
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {

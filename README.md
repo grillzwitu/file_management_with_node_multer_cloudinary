@@ -13,6 +13,7 @@ This project is a simple demonstration of a file management backend application 
 - **dotenv:** To enable the use of environment variables to store application secrets.
 - **ejs:** To create simple views.
 - **express-session:** To create sessions after authentication.
+- **express-validator:** To handle validation for user registration.
 - **mongodb:** The cloud database storage service.
 - **mongoose:** The ODM library for MongoDB.
 - **multer:** Node.js middleware for handling multipart-form data, used for uploading files.
@@ -46,17 +47,20 @@ CLOUD_API_SECRET="your_cloudinary_api_secret"
 
   - **POST** (http://localhost:3000/users/register): To sign up or register as a user, requires a JSON body containing username, email, name, password, password2.
   - **POST** (http://localhost:3000/users/login): To log in as a user on the application, requires a JSON body containing username and password.
-  - **GET** (http://localhost:3000/users/logout): To log out and end a session.
+  - **GET** (http://localhost:3000/users/logout): To log out.
   - **POST** (http://localhost:3000/files/uploadfile): To upload and store a file on the cloud service.
-  - **GET** (http://localhost:3000/files/getallfiles): To retrive alist of all the file records.
-  - **GET** (http://localhost:3000/files/getfile/id): To download/retrieve a file from the application. Downloaded files are saved in a downloads folder which is created in the application's base location.
+  - **GET** (http://localhost:3000/files/getallfiles): To retrive a list of the record of all the user's files.
+  - **GET** (http://localhost:3000/files/getfile/id): To download/retrieve a file from the application. Downloaded files are saved in the computer's default downloads folder.
   - **DELETE** (http://localhost:3000/files/deletefile/id): To delete the file from the application.
 
-Note: To carry out any file operation, the user must be logged in.
+Note: 
+ - To carry out any file operation, the user must be logged in.
+ - Views are available for testing but it is still in the works, you may need to click on the redirect links and refresh the files page to see the changes you have made. To try it enter http://localhost:3000 in you browser after succesfully starting/running the appliaction.  
+
 
 ## Work in Progress
 - Testing extensively to handle errors related to specific edge cases.
-- Creating views with EJS to make frontend templates for a better testing experience.
+- Creating views with EJS to make templates for a better testing experience.
 - Implement notifications for events (registration, file upload and file deletion).
 - Implement application logging.
 - Deploy/Host application.

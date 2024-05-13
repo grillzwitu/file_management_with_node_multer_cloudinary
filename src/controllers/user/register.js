@@ -40,7 +40,7 @@ exports.register = async (req, res) => {
 
         // Save the new user
         const savedUser = await newUser.save();
-        res.redirect(201, 'pages/login');
+        res.redirect(201, 'pages/login?currentPage=login');
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');

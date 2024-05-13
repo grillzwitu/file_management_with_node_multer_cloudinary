@@ -17,27 +17,17 @@ const download = async (req, res, next) => {
     
         const url = result.url;
     
-        // Setting the download directory
-        const downloadDir = './downloads';
-
-        // Check if the directory exists, if not, create it
-        if (!fs.existsSync(downloadDir)) {
-            fs.mkdirSync(downloadDir, { recursive: true });
-        }
-    
         // Extracting filename from URL
         const filename = path.basename(url);
     
-        // Create a writable stream to save the file
-        const writer = fs.createWriteStream(path.join(downloadDir, filename));
-    
-        // Download the file from the URL and pipe it to the writer stream
+        // Set the Content-Disposition header to force download
+        res.setHeader('Content-Disposition', 'attachment; filename=' + filename);
+
+        // Download the file from the URL and pipe it directly to the response stream
         const response = await axios.get(url, { responseType: 'stream' });
-        await streamPipeline(response.data, writer);
+        response.data.pipe(res);
     
         console.log('File downloaded successfully.');
-    
-        res.status(200).json(result);
     } catch (err) {
         console.error(err);
         res.status(400).send(err);

@@ -5,17 +5,23 @@ exports.login = (req, res, next) => {
     /* Authenticate with passport */
     passport.authenticate('local', (err, user, info) => {
       if (err) {
-          return next(err);
+        return next(err);
       }
       if (!user) {
-          return res.status(400).send('Error in Login');
+        return res.status(400).send('Error in Login');
       }
-      req.logIn(user, (err) => {
-          if (err) {
-              return next(err);
-          }
-          
-          return res.redirect(200, 'pages/files');
+      req.logIn(user, async (err) => {
+        if (err) {
+          return next(err);
+        }
+        try {
+          // Render the files page with the files data
+          return res.redirect(200, "/files");
+        } catch (error) {
+          // Handle error if the call to getallfiles endpoint fails
+          console.error('Error occurred while fetching files:', error);
+          return res.status(500).send('Internal server error');
+        }
       });
   })(req, res, next);
 
@@ -31,7 +37,7 @@ exports.logout = (req, res) => {
       return res.status(500).send('Error logging out');
     }
     /* Logging out */
-    res.redirect(200, "pages/home");
+    return res.redirect(200, "/");
   });
 
 }

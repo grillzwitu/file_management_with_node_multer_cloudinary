@@ -1,1 +1,104 @@
-<h1>Files</h1>
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+
+    <body class="container">
+
+        <header>
+            <%- include('../partials/header'); %>
+        </header>
+
+        <main>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Upload Form -->
+                        <div class="card">
+                            <div class="card-header">
+                                Upload File
+                            </div>
+                            <div class="card-body">
+                                <form action="/files/uploadfile" method="post" enctype="multipart/form-data" onsubmit="reloadPage()">
+                                    <div class="form-group">
+                                        <label for="file">Choose File</label>
+                                        <input type="file" class="form-control-file" id="file" name="file" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <!-- File List -->
+                        <div class="card">
+                            <div class="card-header">
+                                File List
+                            </div>
+
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <% files.forEach(file => { %>
+                                    <li class="list-group-item">
+                                        <%= file.name %>
+
+                                        <div>
+                                            <!-- View -->
+                                            <a href="<%= file.url %>" target="_blank" class="btn btn-sm btn-success mx-2">View</a>
+                                            
+                                            <!-- Download Link -->
+                                            <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2">Download</a>
+                                            
+                                            <!-- Delete button -->                                            
+                                            <button type="submit" id="deleteButton" onclick="deleteFile('<%= file._id %>')" class="btn btn-sm btn-danger mx-2">Delete</button>
+                                            
+                                        </div>
+                                        
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </main>
+
+        <footer class="fixed-bottom">
+            <%- include('../partials/footer'); %>
+        </footer>
+
+        <script async>
+            function deleteFile(fileId) {
+                if (confirm("Are you sure you want to delete this file?")) {
+                    fetch('/files/deletefile/' + fileId, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Handle successful deletion
+                        console.log('File deleted successfully:', data);
+                    })
+                    .catch(error => {
+                        // Handle errors
+                        console.error('There was a problem with the delete request:', error);
+                    });
+                }
+            }
+        </script>
+
+    </body>
+    
+</html>
