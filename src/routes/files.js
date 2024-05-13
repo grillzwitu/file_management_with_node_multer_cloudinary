@@ -13,7 +13,7 @@ router.get("/", ensureAuthenticated, async function (req, res){
 
         // Call the controller function to get all files
         const files = await File.find({owner: req.user.username});
-        console.log(files)
+
         // Render the files page with the files data
         res.render("pages/files", { currentPage: 'files', files: files });
     } catch (error) {

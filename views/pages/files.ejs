@@ -48,11 +48,10 @@
                                         <div>
                                             <a href="<%= file.url %>" class="btn btn-sm btn-success mx-2">View</a>
                                             <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2">Download</a>
-                                            <!-- Delete button -->
-                                            <form action="/files/deletefile/<%= file._id %>" method="delete" class="d-inline">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-sm btn-danger mx-2">Delete</button>
-                                            </form>
+                                            
+                                            <!-- Delete button -->                                            
+                                            <button type="submit" onclick="deleteFile('<%= file._id %>')" class="btn btn-sm btn-danger mx-2">Delete</button>
+                                            
                                         </div>
                                         
                                     </li>
@@ -71,6 +70,27 @@
         <footer class="fixed-bottom">
             <%- include('../partials/footer'); %>
         </footer>
+
+        <script>
+            function deleteFile(fileId) {
+                if (confirm("Are you sure you want to delete this file?")) {
+                    fetch('/files/deletefile/' + fileId, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .catch(error => {
+                        // Handle errors
+                        console.error('There was a problem with the delete request:', error);
+                    });
+                }
+            }
+
+        </script>
 
     </body>
     
