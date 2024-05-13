@@ -33,6 +33,7 @@
                     </div>
 
                     <div class="col-md-6">
+                        
                         <!-- File List -->
                         <div class="card">
                             <div class="card-header">
@@ -46,7 +47,10 @@
                                         <%= file.name %>
 
                                         <div>
-                                            <a href="<%= file.url %>" class="btn btn-sm btn-success mx-2">View</a>
+                                            <!-- View -->
+                                            <a href="<%= file.url %>" target="_blank" class="btn btn-sm btn-success mx-2">View</a>
+                                            
+                                            <!-- Download Link -->
                                             <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2">Download</a>
                                             
                                             <!-- Delete button -->                                            
