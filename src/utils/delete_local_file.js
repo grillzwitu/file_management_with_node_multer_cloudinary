@@ -17,7 +17,7 @@ const deleteFile = (path) => {
             console.error('Error deleting file:', err);
             return res.status(500).send('Internal server error');
         }
-        console.log('local file upload deleted successfully');
+
         });
     });
 }

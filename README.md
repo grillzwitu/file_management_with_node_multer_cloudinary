@@ -50,14 +50,17 @@ CLOUD_API_SECRET="your_cloudinary_api_secret"
   - **GET** (http://localhost:3000/users/logout): To log out.
   - **POST** (http://localhost:3000/files/uploadfile): To upload and store a file on the cloud service.
   - **GET** (http://localhost:3000/files/getallfiles): To retrive a list of the record of all the user's files.
-  - **GET** (http://localhost:3000/files/getfile/id): To download/retrieve a file from the application. Downloaded files are saved in a downloads folder which is created in the application's base location.
+  - **GET** (http://localhost:3000/files/getfile/id): To download/retrieve a file from the application. Downloaded files are saved in the computer's default downloads folder.
   - **DELETE** (http://localhost:3000/files/deletefile/id): To delete the file from the application.
 
-Note: To carry out any file operation, the user must be logged in.
+Note: 
+ - To carry out any file operation, the user must be logged in.
+ - Views are available for testing but it is still in the works, you may need to click on the redirect links and refresh the files page to see the changes you have made. To try it enter http://localhost:3000 in you browser after succesfully starting/running the appliaction.  
+
 
 ## Work in Progress
 - Testing extensively to handle errors related to specific edge cases.
-- Creating views with EJS to make frontend templates for a better testing experience.
+- Creating views with EJS to make templates for a better testing experience.
 - Implement notifications for events (registration, file upload and file deletion).
 - Implement application logging.
 - Deploy/Host application.

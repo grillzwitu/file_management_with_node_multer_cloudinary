@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        
+
                         <!-- File List -->
                         <div class="card">
                             <div class="card-header">
@@ -54,7 +54,7 @@
                                             <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2">Download</a>
                                             
                                             <!-- Delete button -->                                            
-                                            <button type="submit" onclick="deleteFile('<%= file._id %>')" class="btn btn-sm btn-danger mx-2">Delete</button>
+                                            <button type="submit" id="deleteButton" onclick="deleteFile('<%= file._id %>')" class="btn btn-sm btn-danger mx-2">Delete</button>
                                             
                                         </div>
                                         
@@ -75,7 +75,7 @@
             <%- include('../partials/footer'); %>
         </footer>
 
-        <script>
+        <script async>
             function deleteFile(fileId) {
                 if (confirm("Are you sure you want to delete this file?")) {
                     fetch('/files/deletefile/' + fileId, {
@@ -87,13 +87,16 @@
                         }
                         return response.json();
                     })
+                    .then(data => {
+                        // Handle successful deletion
+                        console.log('File deleted successfully:', data);
+                    })
                     .catch(error => {
                         // Handle errors
                         console.error('There was a problem with the delete request:', error);
                     });
                 }
             }
-
         </script>
 
     </body>
