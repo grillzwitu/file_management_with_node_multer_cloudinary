@@ -25,7 +25,9 @@ This project is a simple demonstration of a file management backend application 
 
 ## Current State
 
-Backend MVP, testing can be done with a REST client, handles basic operations of user registration and authentication, file upload, retrieval, and deletion.
+MVP, testing can be done with a REST client or from a web browser, handles basic operations of user registration and authentication, file upload, file viewing, file download and file deletion.  
+
+File types currently supported are image, video and pdf files.
 
 ## Run Application
 
