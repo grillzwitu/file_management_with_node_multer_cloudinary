@@ -62,28 +62,41 @@
             <%- include('../partials/footer'); %>
         </footer>
         <script async>
+
             function deleteFile(fileId) {
-                if (confirm("Are you sure you want to delete this file?")) {
-                    fetch('/files/deletefile/' + fileId, {
-                        method: 'DELETE'
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // Handle successful deletion
-                        console.log('File deleted successfully:', data);
-                        location.reload();
-                    })
-                    .catch(error => {
-                        // Handle errors
+            if (confirm("Are you sure you want to delete this file?")) {
+                fetch('/files/deletefile/' + fileId, {
+                    method: 'DELETE',
+                    credentials: 'same-origin'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle successful deletion
+                    console.log('File deleted successfully:', data);
+                    window.location.href = "/files?currentPage=files";
+                })
+                .catch(error => {
+                    // Handle errors, including 404 error
+                    if (error.message === 'Network response was not ok') {
+                        console.error('File not found or unauthorized');
+                        // Redirect to the login page or handle the error appropriately
+                        window.location.href = '/users/login?currentPage=login';
+                    } else {
                         console.error('There was a problem with the delete request:', error);
-                    });
-                }
+                    }
+                });
             }
+        }
+
         </script>
+
+        <!-- Bootstrap JS -->
+              <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     </body>
 </html>

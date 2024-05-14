@@ -24,7 +24,8 @@ const uploadFile = async (req, res, next) => {
         deleteFile(req.file.path);
 
         // Sending response
-        res.status(201).json({ success: true, data: file });
+        res.status(201)
+        return res.redirect("/files?currentPage=files");
     } catch (err) {
         //logger.error('Error occurred while uploading file:', err);
         res.status(400).json({ success: false, error: 'File upload failed. Please try again.' });

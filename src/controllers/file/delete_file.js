@@ -20,7 +20,9 @@ const deleteFile = async (req, res, next) => {
         // Delete file record from the database
         await File.findByIdAndDelete(req.params.id);
     
-        res.status(200).json(record);
+        res.status(200);
+        res.json(record);
+        //return res.redirect(req.get("referer"));
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal server error');
