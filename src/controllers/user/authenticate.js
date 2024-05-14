@@ -16,7 +16,8 @@ exports.login = (req, res, next) => {
         }
         try {
           // Render the files page with the files data
-          return res.redirect(200, "/files");
+          res.status(200)
+          return res.redirect("/files?currentPage=files");
         } catch (error) {
           // Handle error if the call to getallfiles endpoint fails
           console.error('Error occurred while fetching files:', error);
@@ -37,7 +38,7 @@ exports.logout = (req, res) => {
       return res.status(500).send('Error logging out');
     }
     /* Logging out */
-    return res.redirect(200, "/");
+    return res.redirect("/?currentPage=home");
   });
 
 }

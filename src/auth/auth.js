@@ -6,7 +6,7 @@ module.exports = {
       if (req.isAuthenticated()) {
         return next();
       }
-      res.redirect(401, '/users/login');
+      res.redirect('/users/login?currentPage=login');
     },
     forwardAuthenticated: function(req, res, next) {
       if (!req.isAuthenticated()) {
