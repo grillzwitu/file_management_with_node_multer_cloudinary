@@ -55,8 +55,7 @@ CLOUD_API_SECRET="your_cloudinary_api_secret"
 
 Note: 
  - To carry out any file operation, the user must be logged in.
- - Views are available for testing but it is still in the works, you may need to click on the redirect links and refresh the files page to see the changes you have made. To try it enter http://localhost:3000 in you browser after succesfully starting/running the appliaction.  
-
+ - Views are available for testing the application. Enter http://localhost:3000 in your browser after succesfully starting/running the application.  
 
 ## Work in Progress
 - Testing extensively to handle errors related to specific edge cases.
