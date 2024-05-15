@@ -48,7 +48,7 @@ CLOUD_API_SECRET="your_cloudinary_api_secret"
   - **POST** (http://localhost:3000/users/register): To sign up or register as a user, requires a JSON body containing username, email, name, password, password2.
   - **POST** (http://localhost:3000/users/login): To log in as a user on the application, requires a JSON body containing username and password.
   - **GET** (http://localhost:3000/users/logout): To log out.
-  - **POST** (http://localhost:3000/files/uploadfile): To upload and store a file on the cloud service. Supported file formats based on the storage service used are images, videos, pdf.
+  - **POST** (http://localhost:3000/files/uploadfile): To upload and store a file on the cloud service.
   - **GET** (http://localhost:3000/files/getallfiles): To retrive a list of the record of all the user's files.
   - **GET** (http://localhost:3000/files/getfile/id): To download/retrieve a file from the application. Downloaded files are saved in the computer's default downloads folder.
   - **DELETE** (http://localhost:3000/files/deletefile/id): To delete the file from the application.

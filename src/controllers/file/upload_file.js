@@ -6,7 +6,7 @@ const uploadFile = async (req, res, next) => {
     try {
 
         // Upload image to cloudinary
-        const uploadedFile = await cloudinary.uploader.upload(req.file.path);
+        const uploadedFile = await cloudinary.uploader.upload(req.file.path, { resource_type: "auto" });
         
         // Create file record 
         let file = new File({
