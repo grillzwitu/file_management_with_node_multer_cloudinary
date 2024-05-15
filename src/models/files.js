@@ -18,7 +18,15 @@ const FileSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    last_update_date: {
+    file_format: {
+      type: String,
+      required: true
+    },
+    size: {
+      type: Number,
+      required: true
+    },
+    created_date: {
       type: Date,
       default: Date.now
     }

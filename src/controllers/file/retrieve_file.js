@@ -1,9 +1,6 @@
-const fs = require('fs');
 const File = require("../../models/files");
 const axios = require('axios');
 const path = require('path');
-const { promisify } = require('util');
-const streamPipeline = promisify(require('stream').pipeline);
 
 const download = async (req, res, next) => {
     try {
