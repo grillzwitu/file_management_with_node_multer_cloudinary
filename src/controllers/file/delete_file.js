@@ -7,7 +7,7 @@ const deleteFile = async (req, res, next) => {
 
     try {
         // fetch the record from db
-        const record = await File.findById(id);
+        const record = await File.findOneAndDelete( {_id: id}, {owner: req.user.username} );
         
         // check if file exists on db
         if (!record) {
@@ -16,9 +16,6 @@ const deleteFile = async (req, res, next) => {
       
         // Delete image from Cloudinary
         await cloudinary.uploader.destroy(record.storage_id);
-    
-        // Delete file record from the database
-        await File.findByIdAndDelete(req.params.id);
     
         res.status(200);
         res.json(record);
