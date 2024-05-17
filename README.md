@@ -57,11 +57,13 @@ CLOUD_API_SECRET="your_cloudinary_api_secret"
 
 Note: 
  - To carry out any file operation, the user must be logged in.
- - Views are available for testing the application. Enter http://localhost:3000 in your browser after succesfully starting/running the application.  
+ - Views are available for testing the application. Enter http://localhost:3000 in your browser after staring the application.  
 
 ## Work in Progress
 - Testing extensively to handle errors related to specific edge cases.
 - Creating views with EJS to make templates for a better testing experience.
+- Add description, collections and tags lists to file object.
+- Implement search and file sorting.
 - Implement notifications for events (registration, file upload and file deletion).
 - Implement application logging.
 - Deploy/Host application.
