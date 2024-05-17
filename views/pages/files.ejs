@@ -44,6 +44,10 @@
                                             <div>
                                                 <%= file.name %>
 
+                                                <div class="text-muted">
+                                                    Uploaded at: <%= new Date(file.created_date).toLocaleString() %>
+                                                </div>
+
                                                 <div >
 
                                                     <!-- View -->
