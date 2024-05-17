@@ -17,9 +17,9 @@
                             </div>
                             <div class="card-body">
                                 <form action="/files/uploadfile" method="post" enctype="multipart/form-data" onsubmit="reloadPage()">
-                                    <div class="form-group">
+                                    <div class="form-group mx-2">
                                         <label for="file">Choose File</label>
-                                        <input type="file" class="form-control-file" id="file" name="file" required>
+                                        <input type="file" class="form-control-file mx-2" id="file" name="file" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Upload</button>
                                 </form>
@@ -38,16 +38,33 @@
                                         <li class="list-group-item">No files available</li>
                                     <% } else { %>
                                         <% files.forEach(file => { %>
-                                        <li class="list-group-item">
-                                            <%= file.name %>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            
+                                            
                                             <div>
-                                                <!-- View -->
-                                                <a href="<%= file.url %>" target="_blank" class="btn btn-sm btn-success mx-2">View</a>
-                                                <!-- Download Link -->
-                                                <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2">Download</a>
-                                                <!-- Delete button -->                                            
-                                                <button type="submit" id="deleteButton" onclick="deleteFile('<%= file._id %>')" class="btn btn-sm btn-danger mx-2">Delete</button>
+                                                <%= file.name %>
+
+                                                <div >
+
+                                                    <!-- View -->
+                                                    <a href="<%= file.url %>" target="_blank" class="btn btn-sm btn-success mx-2 my-3">View</a>
+                                                    <!-- Download Link -->
+                                                    <a href="/files/downloadfile/<%= file._id %>" class="btn btn-sm btn-success mx-2  my-3">Download</a>
+                                                    <!-- Delete button -->                                            
+                                                    <button type="submit" id="deleteButton" onclick="deleteFile('<%= file._id %>')" class="btn btn-sm btn-danger mx-2  my-3">Delete</button>
+
+                                                </div>
+
+                                                
                                             </div>
+
+                                            <span class="badge bg-info text-dark mb-5">
+                                                Format: <%= file.file_format %>
+                                            </span>
+
+                                            <span class="badge bg-info text-dark mb-5">
+                                                Size: <%= file.size %> B
+                                            </span>
                                         </li>
                                         <% }); %>
                                     <% } %>

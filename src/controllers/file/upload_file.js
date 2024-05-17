@@ -1,4 +1,5 @@
 const deleteFile = require("../../utils/delete_local_file");
+const fileFormat  = require("../../utils/format_reader");
 const File = require("../../models/files");
 const cloudinary = require("../../utils/cloudinary");
 
@@ -6,7 +7,7 @@ const uploadFile = async (req, res, next) => {
     try {
 
         // Upload image to cloudinary
-        const uploadedFile = await cloudinary.uploader.upload(req.file.path);
+        const uploadedFile = await cloudinary.uploader.upload(req.file.path, { resource_type: "auto", use_filename: true });
         
         // Create file record 
         let file = new File({
@@ -14,7 +15,9 @@ const uploadFile = async (req, res, next) => {
             owner: req.user.username,
             storage_id: uploadedFile.public_id,
             url: uploadedFile.secure_url,
-            last_update_date: uploadedFile.created_at
+            file_format: fileFormat(uploadedFile.url),
+            size: uploadedFile.bytes,
+            created_date: uploadedFile.created_at
         });
         
         // Save file
