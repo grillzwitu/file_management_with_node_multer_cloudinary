@@ -49,6 +49,9 @@ router.get('/files/byext/:ext', ensureAuthenticated, (req, res, next) => {
     readFilesByExtension(req, res, req.params.ext, next);
 });
 
+// Route to share a file with another user
+router.post('/sharefile', ensureAuthenticated, shareFile);
+
 /* Delete file route */ 
 router.delete('/deletefile/:id', ensureAuthenticated, deleteController);
 

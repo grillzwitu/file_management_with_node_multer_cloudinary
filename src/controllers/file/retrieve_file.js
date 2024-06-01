@@ -5,13 +5,24 @@ const path = require('path');
 const download = async (req, res, next) => {
     try {
         // Fetch the record from the database
-        const result = await File.findOne({ _id: req.params.id, owner:req.user.username });
-    
-        // check if file exists on db
+        const result = await File.findById(req.params.id)
+            .populate('shared_with.user', 'username');
+
+        // Check if the file exists in the db
         if (!result) {
             return res.status(404).json({ error: 'File not found' });
         }
-    
+
+        // Check if the user is the owner or has download permissions
+        const isOwner = result.owner === req.user.username;
+        const hasDownloadPermission = result.shared_with.some(sharedUser => 
+            sharedUser.user.username === req.user.username && sharedUser.permissions.canDownload
+        );
+
+        if (!isOwner && !hasDownloadPermission) {
+            return res.status(403).json({ error: 'You do not have permission to download this file' });
+        }
+
         const url = result.url;
     
         // Extracting filename from URL
@@ -27,7 +38,7 @@ const download = async (req, res, next) => {
         console.log('File downloaded successfully.');
     } catch (err) {
         console.error(err);
-        res.status(400).send(err);
+        res.status(500).json({ error: 'Internal server error', details: err.message });
     }
 };
 

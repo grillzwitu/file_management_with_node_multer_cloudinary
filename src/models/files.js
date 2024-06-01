@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-const User = require('./users');
 
-/* Creating the schema with name, storage_id, url, owner and date */
+// Creating the schema with name, storage_id, url, owner and date
 const FileSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true
     },
-    owner:  {
+    owner: {
       type: String,
       required: true
     },
@@ -35,14 +34,26 @@ const FileSchema = new mongoose.Schema({
       type: Array,
       required: false
     },
-    shared_with: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: false
-    }
-  });
-  
-  /* Exporting schema with collection as File */
-  const File = mongoose.model('File', FileSchema);
-  
-  module.exports = File;
+    shared_with: [{
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      permissions: {
+        canShare: {
+          type: Boolean,
+          default: false
+        },
+
+        canDownload: {
+          type: Boolean,
+          default: false
+        }
+      }
+    }]
+});
+
+// Exporting schema with collection as File
+const File = mongoose.model('File', FileSchema);
+
+module.exports = File;
