@@ -6,6 +6,9 @@ const uploadController = require("../controllers/file/upload_file");
 const downloadController = require("../controllers/file/retrieve_file");
 const deleteController = require("../controllers/file/delete_file");
 const allFilesController = require("../controllers/file/list_all_files");
+const readFilesByName = require("../controllers/file/read_files_by_name");
+const readFilesByTag = require("../controllers/file/read_files_by_tag");
+const readFilesByExtension = require("../controllers/file/read_files_by_extension");
 const File = require("../models/files");
 
 router.get("/", ensureAuthenticated, async function (req, res){
@@ -30,6 +33,21 @@ router.get('/getallfiles', ensureAuthenticated, allFilesController);
 
 /* download route  */ 
 router.get('/downloadfile/:id', ensureAuthenticated, downloadController);
+
+// Get files by name route
+router.get('/files/byname/:name', ensureAuthenticated, (req, res, next) => {
+    readFilesByName(req, res, req.params.name, next);
+});
+
+// Get files by tag route
+router.get('/files/bytag/:tag', ensureAuthenticated, (req, res, next) => {
+    readFilesByTag(req, res, req.params.tag, next);
+});
+
+// Get files by extension route
+router.get('/files/byext/:ext', ensureAuthenticated, (req, res, next) => {
+    readFilesByExtension(req, res, req.params.ext, next);
+});
 
 /* Delete file route */ 
 router.delete('/deletefile/:id', ensureAuthenticated, deleteController);
