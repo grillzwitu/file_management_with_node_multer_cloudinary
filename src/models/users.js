@@ -22,6 +22,11 @@ const UserSchema = new mongoose.Schema({
     date: {
       type: Date,
       default: Date.now
+    },
+    shared_files: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "File",
+      required: false
     }
   });
   

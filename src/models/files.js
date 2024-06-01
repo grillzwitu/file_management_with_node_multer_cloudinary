@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./users');
 
 /* Creating the schema with name, storage_id, url, owner and date */
 const FileSchema = new mongoose.Schema({
@@ -29,6 +30,15 @@ const FileSchema = new mongoose.Schema({
     created_date: {
       type: Date,
       default: Date.now
+    },
+    tags: {
+      type: Array,
+      required: false
+    },
+    shared_with: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: false
     }
   });
   
