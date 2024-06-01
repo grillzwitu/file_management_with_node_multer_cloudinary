@@ -9,6 +9,7 @@ const allFilesController = require("../controllers/file/list_all_files");
 const readFilesByName = require("../controllers/file/read_files_by_name");
 const readFilesByTag = require("../controllers/file/read_files_by_tag");
 const readFilesByExtension = require("../controllers/file/read_files_by_extension");
+const updatePermission = require('../controllers/file/update_permission');
 const File = require("../models/files");
 
 router.get("/", ensureAuthenticated, async function (req, res){
@@ -51,6 +52,9 @@ router.get('/files/byext/:ext', ensureAuthenticated, (req, res, next) => {
 
 // Route to share a file with another user
 router.post('/sharefile', ensureAuthenticated, shareFile);
+
+// Route to update file permissions for a shared user
+router.patch('/updatepermission', ensureAuthenticated, updatePermission);
 
 /* Delete file route */ 
 router.delete('/deletefile/:id', ensureAuthenticated, deleteController);
