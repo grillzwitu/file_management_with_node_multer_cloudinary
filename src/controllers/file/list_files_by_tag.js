@@ -4,10 +4,11 @@ const File = require("../../models/files");
 const readFilesByTag = async (req, res, tag, next) => {
     try {
         // Building the query
+        const modifiedTag = tag.replace(/\s/g, "\\s*");
         const query = {
             $or: [
-                { owner: req.user.username, tags: { $regex: tag, $options: 'i' } },
-                { shared_with: req.user._id, tags: { $regex: tag, $options: 'i' } }
+                { owner: req.user.username, tags: { $regex: `.*${modifiedTag}.*`, $options: 'i' } },
+                { shared_with: req.user._id, tags: { $regex: `.*${modifiedTag}.*`, $options: 'i' } }
             ]
         };
 
