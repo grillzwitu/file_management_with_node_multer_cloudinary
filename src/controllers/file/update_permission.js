@@ -38,6 +38,10 @@ const updatePermission = async (req, res) => {
     file.shared_with[sharedUserIndex].permissions = { ...file.shared_with[sharedUserIndex].permissions, ...permissions };
     await file.save();
 
+    // Create notification for shared user on permission update
+    const sharedUserNotification = await createNotification(req.file.sharedWith, `Permissions for file "${req.file.name}" have been updated by ${req.file.owner}.`);
+
+
     res.status(200).json({ message: 'Permissions updated successfully' });
   } catch (err) {
     // Handle specific errors

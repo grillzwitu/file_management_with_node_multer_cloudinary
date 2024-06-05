@@ -1,5 +1,6 @@
 const File = require("../../models/files");
 const cloudinary = require("../../utils/cloudinary");
+const createNotification = require("../notification/create_notification");
 
 const deleteFile = async (req, res, next) => {
   const id = req.params.id;
@@ -25,6 +26,9 @@ const deleteFile = async (req, res, next) => {
     const sanitizedRecord = { ...record };
     delete sanitizedRecord.owner; // Example: exclude owner information
     delete sanitizedRecord.shared_with; // Example: exclude shared_with list
+
+    // Create notification for owner on file deletion (optional)
+    const ownerNotification = await createNotification(req.user.id, `File "${req.record.name}" deleted.`);
 
     res.status(200).json(sanitizedRecord);
   } catch (err) {

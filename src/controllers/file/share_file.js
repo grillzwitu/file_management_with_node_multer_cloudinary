@@ -1,5 +1,6 @@
 const File = require('../../models/files');
 const User = require('../../models/users');
+const createNotification = require("../notification/create_notification");
 
 // Share file with a user
 const shareFile = async (req, res) => {
@@ -35,6 +36,12 @@ const shareFile = async (req, res) => {
       // Add the file to the user's shared_files list
       user.shared_files.push(file._id);
       await user.save();
+
+      // Create notification for owner
+      const ownerNotification = await createNotification(req.file.owner, `File "${req.file.name}" shared with user ${req.body.sharedWithUsername}.`);
+
+      // Create notification for shared user (regardless of permission)
+      const sharedUserNotification = await createNotification(req.body.sharedWithUsername, `You have been shared a file "${req.file.name}" by ${req.file.owner}.`);
   
       res.status(200).json({ message: 'File shared successfully' });
     } catch (err) {

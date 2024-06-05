@@ -29,9 +29,12 @@ const uploadFile = async (req, res, next) => {
   
       // Remove file from local storage (uploads)
       deleteFile(req.file.path);
+
+      // Create notification for successful upload (optional)
+      const uploadNotification = await createNotification(req.user.id, `File "${req.file.originalname}" uploaded successfully.`);
   
       // Sending response
-      res.status(201).json({ message: 'File uploaded successfully!', file: file }); // Send details of uploaded file
+      res.status(201).json({ message: 'File uploaded successfully!', file: file, notification: uploadNotification }); // Send details of uploaded file
   
     } catch (err) {
       // Handle specific errors
